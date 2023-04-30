@@ -31,7 +31,7 @@ export class MedAppointmentController {
     @Res() res: Response,
     @Param('id') id: any,
   ) {
-    let getOne = await this.productsService.findOne(id);
+    let getOne = await this.productsService.findOneByPatientName(id);
     return res.send(getOne);
   }
 

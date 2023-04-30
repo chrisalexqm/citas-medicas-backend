@@ -5,7 +5,7 @@ export class MedAppointment {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column()
+  @Column({ name: 'patient_name' })
   patientName: string;
 
   @Column()

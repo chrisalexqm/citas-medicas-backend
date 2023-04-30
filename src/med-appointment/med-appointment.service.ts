@@ -49,6 +49,21 @@ export class MedAppointmentService {
     };
   }
 
+  async findOneByPatientName(name: string) {
+    const findOne = await this.productRepository
+      .createQueryBuilder()
+      .select()
+      .where('patient_name ILIKE :searchTerm', { searchTerm: `%${name}%` })
+      .getMany();
+    if (!findOne) throw new BadRequestException({ error: 'Data Not Found' });
+    return {
+      status: HttpStatus.OK,
+      messsage: 'Data fetch successfully',
+      // totalData : findAll && findAll.length ? findAll.length :  0,
+      result: findOne,
+    };
+  }
+
   async update(id: any, updateProductDto: UpdateMedAppointmentDto) {
     const result: any = await this.productRepository.update(
       { id },
